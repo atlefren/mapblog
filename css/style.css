@@ -43,3 +43,7 @@ div#overlay {
     margin-top: 10px;
 }
 
+sup.small {
+    font-size: 15pt;
+    top: -30px;
+}

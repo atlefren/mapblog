@@ -2,8 +2,21 @@ var blog = {};
 
 (function(ns){
 
-    ns.createMap = function(){
-        var map = L.map('map', {zoomControl: false}).setView([60, 10], 10);
+    ns.showMap = function(){
+        navigator.geolocation.getCurrentPosition(function (pos) {
+
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            createMap(lon, lat);
+
+        }, function (error) {
+            //alert("Unable to determine location. Error: " + error.code);
+            createMap(10.4, 63.4);
+        }, {timeout: 50000});
+    };
+
+    var createMap = function(lon, lat){
+        var map = L.map('map', {zoomControl: false}).setView([lat, lon], 10);
         map.attributionControl.setPrefix("");
         L.tileLayer('http://{s}.tile.cloudmade.com/{key}/998/256/{z}/{x}/{y}.png',
             {
@@ -18,11 +31,10 @@ var blog = {};
     window.onscroll = function() {
         $("#map").css("top", window.pageYOffset + "px");
     };
-
 }(blog));
 
 
 
 Zepto(function($){
-    blog.createMap();
+    blog.showMap();
 });
