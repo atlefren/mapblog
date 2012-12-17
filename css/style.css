@@ -47,3 +47,8 @@ sup.small {
     font-size: 15pt;
     top: -30px;
 }
+
+
+.controls {
+    float: right;
+}

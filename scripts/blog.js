@@ -2,7 +2,7 @@ var blog = {};
 
 (function(ns){
 
-    ns.showMap = function(){
+    var showMap = function(){
         navigator.geolocation.getCurrentPosition(function (pos) {
 
             var lat = pos.coords.latitude;
@@ -11,7 +11,7 @@ var blog = {};
 
         }, function (error) {
             //alert("Unable to determine location. Error: " + error.code);
-            createMap(10.4, 63.4);
+            createMap(10.4, 60.4);
         }, {timeout: 50000});
     };
 
@@ -26,7 +26,21 @@ var blog = {};
 
             }
         ).addTo(map);
+
+        $("#in").on("click", function() {
+            map.zoomIn();
+        });
+
+        $("#out").on("click", function() {
+            map.zoomOut();
+        });
     };
+
+
+    Zepto(function($){
+        showMap();
+    });
+
 
     window.onscroll = function() {
         $("#map").css("top", window.pageYOffset + "px");
@@ -34,7 +48,3 @@ var blog = {};
 }(blog));
 
 
-
-Zepto(function($){
-    blog.showMap();
-});
